@@ -11,4 +11,8 @@ public class Driver {
 	public static void Jason() {
 		System.out.println("hello from Jason");
 	}
+	
+	public static void methodTest() {
+		
+	}
 }
