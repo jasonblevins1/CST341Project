@@ -9,6 +9,6 @@ public class Driver {
 	}
 //Alphonso Martinez
 	public static void Alphonso() {
-		System.out.println("hello from Alphonso1");
+		System.out.println("hello from Alphonso");
 	}
 }
