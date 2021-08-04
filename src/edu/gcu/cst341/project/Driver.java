@@ -8,6 +8,12 @@ public class Driver {
 
 	}
 
+//Alphonso Martinez
+	public static void Alphonso() {
+		System.out.println("hello from Alphonso1");
+	}
+
+
 	
 		// Chris
 		public static void Chris() {
@@ -22,5 +28,6 @@ public class Driver {
 	public static void methodTest() {
 		
 	}
+
 
 }
