@@ -7,5 +7,9 @@ public class Driver {
 		gcu.open();
 
 	}
-
+	
+		// Chris
+		public static void Chris() {
+			System.out.println("Hello from Chris");
+		}
 }
