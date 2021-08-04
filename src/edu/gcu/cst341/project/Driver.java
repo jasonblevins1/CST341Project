@@ -7,6 +7,13 @@ public class Driver {
 		gcu.open();
 
 	}
+
+	
+		// Chris
+		public static void Chris() {
+			System.out.println("Hello from Chris");
+		}
+
 //Jason
 	public static void Jason() {
 		System.out.println("hello from Jason");
@@ -15,4 +22,5 @@ public class Driver {
 	public static void methodTest() {
 		
 	}
+
 }
