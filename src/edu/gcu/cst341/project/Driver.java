@@ -25,6 +25,11 @@ public class Driver {
 		System.out.println("hello from Jason");
 	}
 	
+	//Brandon
+	public static void Brandon() {
+		System.out.println("hello from Brandon");
+	}
+	
 	public static void methodTest() {
 		
 	}
