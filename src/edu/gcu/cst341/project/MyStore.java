@@ -85,10 +85,20 @@ public class MyStore {
 		case 3:
 			deleteCartItem();
 			break;
+		case 4:
+			viewProducts();
+			break;
 		default:
 			return;
 		}
 	}
+
+	private void viewProducts() {
+		readProducts();
+		
+	}
+
+	
 
 	private void admin() {
 		switch (UserInterface.menuAdmin()) {
@@ -121,8 +131,36 @@ public class MyStore {
 	}
 	
 	private void deleteCartItem() {
-		System.out.println("Delete from cart...");
-		System.out.println();
+
+		try {
+			System.out.println("Please enter your user ID to view items in your cart:");
+			int userId = sc.nextInt();
+			sc.nextLine();
+
+			String sqlSelect = "SELECT *FROM cst341project.shoppingcart where UserId = ?;";
+			PreparedStatement ps = con.getConnection().prepareStatement(sqlSelect);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			System.out.println("================================================");
+			System.out.println("the product number for your order is " + rs.getString("ProductId"));
+			System.out.println("================================================");
+			System.out.println("================================================");
+			System.out.println("Please reenter your user ID to delete cart items:");
+			System.out.println("================================================");
+
+			int userId1 = sc.nextInt();
+			sc.nextLine();
+			String sqlBasic = "delete from cst341project.shoppingcart\n" + "  where UserId = ?;";
+			PreparedStatement ps1 = con.getConnection().prepareStatement(sqlBasic);
+			ps1.setInt(1, userId1);
+			ps1.executeUpdate();
+			System.out.println("================================================");
+			System.out.println("------------------Deleting cart-----------------");
+			System.out.println("================================================");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void createProduct() {
@@ -275,6 +313,8 @@ try {
 	}
 
 }
+
+
 
 
 
