@@ -2,8 +2,11 @@ package edu.gcu.cst341.project;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 
 public class MyStore {
@@ -121,13 +124,69 @@ public class MyStore {
 		}
 	}
 	
+	@SuppressWarnings("null")
 	private void createCartItem() {
-		
+		try {
+			System.out.println("Please enter your user ID to view items in your cart:");
+			int userId = sc.nextInt();
+			sc.nextLine();
+
+			String sqlSelect = "SELECT *FROM cst341project.shoppingcart where UserId = ?;";
+			PreparedStatement ps = con.getConnection().prepareStatement(sqlSelect);
+			ps.setInt(1,userId);
+			ResultSet rs = ps.executeQuery();
+			System.out.printf("%-20s %-20s %-20s %-20s \n","[User ID] " , "[Product Id] " , "[Date Added] " , "[Time Added]");
+			while(rs.next()) {
+				
+				System.out.printf("%-20s %-20s %-20s %-20s \n", rs.getString("userId") , rs.getString("ProductId"), rs.getString("AddedDate"), rs.getString("AddedTime"));
+			
+				
+			}
+			int user = userId;
+			System.out.println("Enter Product ID to add");
+			int prodId = sc.nextInt();
+			sc.nextLine();
+			LocalDate date = LocalDate.now();
+			LocalTime time = LocalTime.now();
+			String sql = "Insert Into cst341project.shoppingcart (UserId, ProductId, AddedDate, AddedTime) Values (?, ?, ?,?)";
+			PreparedStatement stmt = null;
+			stmt = con.getConnection().prepareStatement(sql);
+			stmt.setInt(1, user);
+			stmt.setInt(2, prodId);
+			stmt.setString(3, date.toString());
+			stmt.setString(4, time.toString());
+			
+			stmt.executeUpdate();
+			stmt.close();
+			System.out.println("Product " + prodId + " has been added to your cart.");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
+	
 	private void readCartItems() {
-		System.out.println("View (Read) cart...");
-		System.out.println();
+		try {
+			System.out.println("Please enter your user ID to view items in your cart:");
+			int userId = sc.nextInt();
+			sc.nextLine();
+
+			String sqlSelect = "SELECT *FROM cst341project.shoppingcart where UserId = ?;";
+			PreparedStatement ps = con.getConnection().prepareStatement(sqlSelect);
+			ps.setInt(1,userId);
+			ResultSet rs = ps.executeQuery();
+			
+			System.out.printf("%-20s %-20s %-20s %-20s \n","[User ID] " , "[Product Id] " , "[Date Added] " , "[Time Added]");
+			while(rs.next()) {
+				
+				System.out.printf("%-20s %-20s %-20s %-20s \n", rs.getString("UserId") , rs.getString("ProductId"), rs.getString("AddedDate"), rs.getString("AddedTime"));
+			
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void deleteCartItem() {
@@ -313,6 +372,7 @@ try {
 	}
 
 }
+
 
 
 
